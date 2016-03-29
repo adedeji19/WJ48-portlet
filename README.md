@@ -16,15 +16,15 @@ Portlet configuration is splitted in two parts: *Generic application preferences
 
 The generic part contains:
 
-1. ** Application Identifier ** the identifies assigned to tha application in the  GridInteractions database table.
-2. ** Application label * (Requred) * ** a short meaningful label for the application.
-3. **  Production environment ** a boolean flag that specify if the portlet will be used in a production or development environment.
-  - if * true * the development environment preferences will be shown
-    - ** UserTrackingDB hostname ** hostname of the Grid and Cloud Engine Usertracking database. Usually * localhost *
-    - ** UserTrackingDB username ** username of the Grid and Cloud Engine Usertracking database user. Usually * user_tracking *
-    - ** UserTrackingDB password ** password specified for the Usertracking database user. Usually * usertracking *
-    - ** UserTrackingDB database ** Grid and Cloud Engine Usertracking database name. Usually * userstracking *
-4. ** Application requirements ** the necessary statements to specify a job execution requirement, such as a particular software, a particular number of CPUs/RAM, etc. defined using JDL format.
+1. **Application Identifier** the identifies assigned to tha application in the  GridInteractions database table.
+2. **Application label *(Requred)*** a short meaningful label for the application.
+3. **Production environment** a boolean flag that specify if the portlet will be used in a production or development environment.
+  - if *true* the development environment preferences will be shown
+    - **UserTrackingDB hostname** hostname of the Grid and Cloud Engine Usertracking database. Usually *localhost*
+    - **UserTrackingDB username** username of the Grid and Cloud Engine Usertracking database user. Usually *user_tracking*
+    - **UserTrackingDB password** password specified for the Usertracking database user. Usually *usertracking*
+    - **UserTrackingDB database** Grid and Cloud Engine Usertracking database name. Usually *userstracking*
+4. **Application requirements** the necessary statements to specify a job execution requirement, such as a particular software, a particular number of CPUs/RAM, etc. defined using JDL format.
 
 #### Available Infrastructures ####
 
@@ -38,9 +38,9 @@ The *Add New* button is meant to make a new infrastructure available to the appl
 
 The fields belonging to this panel are:
 
-1. ** Enabled ** A boolean which enable or disable the current infrastructure.
-2. ** Infrastructure Name * (Required) * ** The infrastructure name for these settings.
-3. ** Middleware * (Required) * ** The middleware used by the current infrastructure. Here you can specify 3 different values.
+1. **Enabled** A boolean which enable or disable the current infrastructure.
+2. **Infrastructure Name *(Required)*** The infrastructure name for these settings.
+3. **Middleware *(Required)*** The middleware used by the current infrastructure. Here you can specify 3 different values.
   - **an acronym** for gLite based middleware.
   - **ssh** for HPC Cluster.
   - **rocci** for cloud based middleware.

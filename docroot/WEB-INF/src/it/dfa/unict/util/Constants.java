@@ -2,14 +2,14 @@ package it.dfa.unict.util;
 
 public final class Constants {
 
-	/** System property - line.separator */
+	/**System property - line.separator */
 	public static final String NEW_LINE = System.getProperty("line.separator");
 
-	/** System property - file.separator */
+	/**System property - file.separator */
 	public static final String FILE_SEPARATOR = System
 			.getProperty("file.separator");
 
-	/** System property - path.separator */
+	/**System property - path.separator */
 	public static final String PATH_SEPARATOR = System
 			.getProperty("path.separator");
 
