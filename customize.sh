@@ -11,18 +11,18 @@ PORTLET_CATEGORY_NAME="Sci-GaIA"
 PORTLET_DISPLAY_NAME="Sci-GaIA Template Portlet"
 PORTLET_NAME="TemplatePortlet"
 PORTLET_CLASSWRAPPER="template-portlet"
-MYPORTLET_CLASS="TemplatePortlet"
+MYPORTLET_CLASS="Template Portlet"
 PORTLET_TITLE="Sci-GaIA Template Portlet"
 PORTLET_SHTITLE="Sci-GaIA Template Portlet"
 PORTLET_KEYWORKDS="Template Portlet"
 
 # Files to customize
-PACKAGE_PATH=./docroot/WEB-INF/src/it/dfa/unict/hostname
+PACKAGE_PATH=./docroot/WEB-INF/src/it/dfa/unict
 LIFERAY_DISPLAY=./docroot/WEB-INF/liferay-display.xml
 LIFERAY_PORTLET=./docroot/WEB-INF/liferay-portlet.xml
 PORTLET=./docroot/WEB-INF/portlet.xml
-PORTLET_CLASS=./docroot/WEB-INF/src/it/dfa/unict/hostname/HostnamePortlet.java
-CONFIG_CLASS=./docroot/WEB-INF/src/it/dfa/unict/hostname/ConfigurationActionImpl.java
+PORTLET_CLASS=./docroot/WEB-INF/src/it/dfa/unict/TemplatePortlet.java
+CONFIG_CLASS=./docroot/WEB-INF/src/it/dfa/unict/ConfigurationActionImpl.java
 VIEW_PILOT_JSP=./docroot/jsps/portlet-config/view-pilot.jsp
 BUILD_FILE=build.xml
 #
@@ -58,64 +58,64 @@ replace_line() {
 
 
 # liferay-display.xml
-REPL_LINE="<category name=\"DFA UNICT\">"
+REPL_LINE="<category name=\"Sci-GaIA\">"
 NEW_LINE="\t<category name=\"$PORTLET_CATEGORY_NAME\">"
 replace_line $LIFERAY_DISPLAY "$REPL_LINE" "$NEW_LINE" "orig"
-REPL_LINE="<portlet id=\"hostname\" />"
-NEW_LINE="\t\t<porltet id=\"$PORTLET_NAME\" />"
+REPL_LINE="<portlet id=\"TemplatePortlet\" />"
+NEW_LINE="\t\t<portlet id=\"$PORTLET_NAME\" />"
 replace_line $LIFERAY_DISPLAY "$REPL_LINE" "$NEW_LINE"
 
 # liferay-portlet.xml
-REPL_LINE="<portlet-name>hostname</portlet-name>"
+REPL_LINE="<portlet-name>TemplatePortlet</portlet-name>"
 NEW_LINE="\t\t<portlet-name>$PORTLET_NAME</portlet-name>"
 replace_line $LIFERAY_PORTLET "$REPL_LINE" "$NEW_LINE" "orig"
-REPL_LINE="<css-class-wrapper>hostname-portlet</css-class-wrapper>"
+REPL_LINE="<css-class-wrapper>template-portlet</css-class-wrapper>"
 NEW_LINE="\t\t<css-class-wrapper>$PORTLET_CLASSWRAPPER</css-class-wrapper>"
 replace_line $LIFERAY_PORTLET "$REPL_LINE" "$NEW_LINE"
 
 # portlet.xml
-REPL_LINE="<portlet-name>hostname</portlet-name>"
+REPL_LINE="<portlet-name>TemplatePortlet</portlet-name>"
 NEW_LINE="\t\t<portlet-name>$PORTLET_NAME</portlet-name>"
 replace_line $PORTLET "$REPL_LINE" "$NEW_LINE" "orig"
-REPL_LINE="<display-name>Hostname Portlet</display-name>"
+REPL_LINE="<display-name>Sci-GaIA Template Portlet</display-name>"
 NEW_LINE="\t\t<display-name>$PORTLET_DISPLAY_NAME</display-name>"
 replace_line $PORTLET "$REPL_LINE" "$NEW_LINE"
-REPL_LINE="<portlet-class>it.dfa.unict.hostname.HostnamePortlet</portlet-class>"
-NEW_LINE="\t\t<portlet-class>it.dfa.unict.hostname.$MYPORTLET_CLASS</portlet-class>"
+REPL_LINE="<portlet-class>it.dfa.unict.TemplatePortlet</portlet-class>"
+NEW_LINE="\t\t<portlet-class>it.dfa.unict.$MYPORTLET_CLASS</portlet-class>"
 replace_line $PORTLET "$REPL_LINE" "$NEW_LINE"
-REPL_LINE="<title>Hostname Portlet</title>"
+REPL_LINE="<title>Sci-GaIA Template Portlet</title>"
 NEW_LINE="\t\t<title>$PORTLET_TITLE</title>"
 replace_line $PORTLET "$REPL_LINE" "$NEW_LINE"
-REPL_LINE="<short-title>Hostname Portlet</short-title>"
+REPL_LINE="<short-title>Sci-GaIA Template Portlet</short-title>"
 NEW_LINE="\t\t<short-title>$PORTLET_SHTITLE</short-title>"
 replace_line $PORTLET "$REPL_LINE" "$NEW_LINE"
-REPL_LINE="<keywords>Hostname Portlet</keywords>"
+REPL_LINE="<keywords>Template Portlet</keywords>"
 NEW_LINE="\t\t<keywords>$PORTLET_KEYWORKDS</keywords>"
 replace_line $PORTLET "$REPL_LINE" "$NEW_LINE"
 
 # HostnamePortlet.java
-REPL_LINE="public class HostnamePortlet extends MVCPortlet {"
+REPL_LINE="public class TemplatePortlet extends MVCPortlet {"
 NEW_LINE="public class $MYPORTLET_CLASS extends MVCPortlet {"
 replace_line $PORTLET_CLASS "$REPL_LINE" "$NEW_LINE"
-REPL_LINE="private final Log _log = LogFactoryUtil.getLog(HostnamePortlet.class);"
+REPL_LINE="private final Log _log = LogFactoryUtil.getLog(TemplatePortlet.class);"
 NEW_LINE="private final Log _log = LogFactoryUtil.getLog($MYPORTLET_CLASS.class);"
 replace_line $PORTLET_CLASS "$REPL_LINE" "$NEW_LINE" "orig"
 mv "$PORTLET_CLASS" "$PACKAGE_PATH/$PORTLET_NAME.java"
 
 # ConfigurationActionImpl.java
-REPL_LINE="Utils.string2File(HostnamePortlet.pilotScript, pilotScript);"
+REPL_LINE="Utils.string2File(TemplatePortlet.pilotScript, pilotScript);"
 NEW_LINE="Utils.string2File($MYPORTLET_CLASS.pilotScript, pilotScript);"
 replace_line $CONFIG_CLASS "$REPL_LINE" "$NEW_LINE"
 
 # view-pilot.jsp
-REPL_LINE="<%@page import=\"it.dfa.unict.hostname.HostnamePortlet\"%>"
-NEW_LINE="<%@page import=\"it.dfa.unict.hostname.$MYPORTLET_CLASS\"%>"
+REPL_LINE="<%@page import=\"it.dfa.unict.TemplatePortlet\"%>"
+NEW_LINE="<%@page import=\"it.dfa.unict.$MYPORTLET_CLASS\"%>"
 replace_line $VIEW_PILOT_JSP "$REPL_LINE" "$NEW_LINE" "orig"
-REPL_LINE="String pilotFilePath = HostnamePortlet.pilotScript;"
+REPL_LINE="String pilotFilePath = TemplatePortlet.pilotScript;"
 NEW_LINE="String pilotFilePath = $MYPORTLET_CLASS.pilotScript;"
 replace_line $VIEW_PILOT_JSP "$REPL_LINE" "$NEW_LINE" "orig"
 
 # build.xml
-REPL_LINE="<project name=\"hostname-portlet\" basedir=\".\" default=\"deploy\">"
+REPL_LINE="<project name=\"template-portlet\" basedir=\".\" default=\"deploy\">"
 NEW_LINE="<project name=\"$PROJECT_NAME\" basedir=\".\" default=\"deploy\">"
 replace_line $BUILD_FILE "$REPL_LINE" "$NEW_LINE" "orig"

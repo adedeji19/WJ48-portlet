@@ -1,7 +1,7 @@
 # template-portlet #
 ## Template portlet ##
 
-![alt tag](https://github.com/sci-gaia/template-portlet/blob/master/docroot/images/AppLogo.png?raw=true=100x20)
+![alt tag](https://github.com/sci-gaia/template-portlet/blob/master/docroot/images/AppLogo.png?raw=true)
 
 The **template-portlet** (mi-hostname-portlet) consists of a portlet example able to submit a job into one or more distributed infrastructures (DCIs). This portlet contains the relevant elements needed to deal with DCIs. The aim of this portlet is to use its code as a template that Science Gateway developers may customize to fit their own specific requirements. To make easy the customization process, a customize.sh bash script is included inside the source code package.
 
