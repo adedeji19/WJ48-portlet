@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE project>
 
-<project name="TemplatePortlet" basedir="." default="deploy">
+<project name="template-portlet" basedir="." default="deploy">
 
 	<import file="../build-common-portlet.xml" />
 </project>
