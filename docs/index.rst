@@ -140,7 +140,7 @@ Following fields will be traslated in the relevant infrastructure parameters bas
 * **Software Tags**: infrastructure specific information.
   * If Middleware is **rocci** here you can specify a ";" separated string with ``<image_id>;<flavor>;<link_resource>``
 
-.. image:: images/add-infrastructure.png
+.. image:: images/add-infrastructure.PNG
    :align: center
    :scale: 70%
    :alt: template-portlet preference
