@@ -80,6 +80,7 @@ The generic part contains:
       * **UserTrackingDB username** username of the Grid and Cloud Engine Usertracking database user. Usually *user_tracking*
       * **UserTrackingDB password** password specified for the Usertracking database user. Usually *usertracking*
       * **UserTrackingDB database** Grid and Cloud Engine Usertracking database name. Usually *userstracking*
+
 * **Application requirements** the necessary statements to specify a job execution requirement, such as a particular software, a particular number of CPUs/RAM, etc. defined using JDL format.
 
 .. image:: images/portlet-config.png
@@ -124,8 +125,10 @@ The fields belonging to this panel are:
 Following fields will be traslated in the relevant infrastructure parameters based on the value specified in this field.
 
 * **BDII host**: The Infrastructure information system endpoint (URL).
+
   * If Middleware is **ssh** here you can specify a ";" separated string with ssh authentications parameters (username;password or username for key based authentication).
   * If Middleware is **rocci** here you can specify the name of the compute resource that will be created.
+
 * **WMS host**: is the service endpoint (URL).
 * **Robot Proxy host server**: the robot proxy server hostname.
 * **Robot Proxy host port**: the robot proxy server port.
@@ -135,9 +138,12 @@ Following fields will be traslated in the relevant infrastructure parameters bas
 * **Proxy Robot VO Role**: the role virtual organization configured.
 * **Proxy Robot Renewal Flag**: a boolean to specify if robot proxy can be renewed before its expiration.
 * **RFC Proxy Robot**: a boolean to specify if robot proxy must be RFC.
+
   * If Middleware is **rocci** this field must be checked.
+
 * **Local Proxy**: the path of a local proxy if you want use this type of authentication.
 * **Software Tags**: infrastructure specific information.
+
   * If Middleware is **rocci** here you can specify a ";" separated string with ``<image_id>;<flavor>;<link_resource>``
 
 .. image:: images/add-infrastructure.PNG

@@ -1,3 +1,7 @@
+[![Travis](http://img.shields.io/travis/csgf/template-portlet/master.png)](https://travis-ci.org/csgf/template-portlet)
+[![Documentation Status](https://readthedocs.org/projects/csgf/badge/?version=latest)](http://csgf.readthedocs.io/en/latest/template-portlet/docs/)
+[![License](https://img.shields.io/github/license/csgf/template-portlet.svg?style?flat)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+
 # template-portlet #
 ## Template portlet ##
 
