@@ -15,8 +15,8 @@ About
 .. image:: images/AppLogo.png
    :height: 100px
    :align: left
-   :target: https://github.com/csgf/infectionModel-portlet
-   :alt: infectionModel-portlet logo
+   :target: https://github.com/sci-gaia/template-portlet
+   :alt: template-portlet logo
 
 The **template-portlet** consists of a portlet example able to submit jobs towards
 different kinds of *Distributed Computing Infrastructures* (**DCIs**).
@@ -173,6 +173,6 @@ Sci-GaIA project dicussion forum (`discourse.sci-gaia.eu <discourse.sci-gaia.eu>
 :Authors:
  Roberto BARBERA - University of Catania (DFA_),
 
- Bruce BECKER    - Brunel University London (CSIR_),
+ Bruce BECKER    - Council for Scientific and Industrial Research (CSIR_),
 
  Mario TORRISI   - University of Catania (DFA_)
