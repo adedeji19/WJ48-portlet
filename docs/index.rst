@@ -13,7 +13,7 @@ About
     - Catania Grid & Cloud Engine 1.5.11 or above (`link <http://grid.ct.infn.it/csgf/binaries/GridEngine/>`_)
 
 .. image:: images/AppLogo.png
-   :height: 100px
+   :width: 200px
    :align: left
    :target: https://github.com/sci-gaia/template-portlet
    :alt: template-portlet logo
@@ -59,7 +59,7 @@ add this new portlet. Following picture shows the correctly result:
 
 .. image:: images/template-view.png
     :align: center
-    :scale: 60%
+    :width: 90%
     :alt: template-portlet view
 
 As soon as the portlet has been successfully deployed you have to configure it using
@@ -85,7 +85,7 @@ The generic part contains:
 
 .. image:: images/portlet-config.png
    :align: center
-   :scale: 70%
+   :width: 90%
    :alt: template-portlet preference
 
 .. note:: You can get the *Application Idetifier* inserting a new entry into the **GridOperations** table:
@@ -148,7 +148,7 @@ Following fields will be traslated in the relevant infrastructure parameters bas
 
 .. image:: images/add-infrastructure.PNG
    :align: center
-   :scale: 70%
+   :width: 90%
    :alt: template-portlet preference
 
 
@@ -163,7 +163,7 @@ a default one will be created with the username and a timestamp.
 
 .. image:: images/view.png
    :align: center
-   :scale: 70%
+   :width: 90%
    :alt: template-portlet view
 
 ==============
@@ -171,7 +171,7 @@ Contributor(s)
 ==============
 
 If you have any questions or comments, please feel free to contact us using the
-Sci-GaIA project dicussion forum (`discourse.sci-gaia.eu <discourse.sci-gaia.eu>`_)
+Sci-GaIA project dicussion forum (`discourse.sci-gaia.eu <http://discourse.sci-gaia.eu>`_)
 
 .. _CSIR: http://www.csir.co.za/
 .. _DFA: http://www.dfa.unict.it/
