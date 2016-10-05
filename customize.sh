@@ -6,15 +6,15 @@
 #
 
 # Customize below settings
-PROJECT_NAME="TemplatePortlet"
+PROJECT_NAME="WJ48Portlet"
 PORTLET_CATEGORY_NAME="Sci-GaIA"
-PORTLET_DISPLAY_NAME="Sci-GaIA Template Portlet"
-PORTLET_NAME="TemplatePortlet"
-PORTLET_CLASSWRAPPER="template-portlet"
-MYPORTLET_CLASS="TemplatePortlet"
-PORTLET_TITLE="Sci-GaIA Template Portlet"
-PORTLET_SHTITLE="Sci-GaIA Template Portlet"
-PORTLET_KEYWORKDS="Template Portlet"
+PORTLET_DISPLAY_NAME="WJ48 Portlet"
+PORTLET_NAME="WJ48Portlet"
+PORTLET_CLASSWRAPPER="WJ48-portlet"
+MYPORTLET_CLASS="WJ48Portlet"
+PORTLET_TITLE="WJ48 Portlet"
+PORTLET_SHTITLE="WJ48 Portlet"
+PORTLET_KEYWORKDS="WJ48 Portlet"
 
 # Files to customize
 PACKAGE_PATH=./docroot/WEB-INF/src/it/dfa/unict

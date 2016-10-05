@@ -3,12 +3,14 @@
     Created on : Feb 24, 2016, 10:08:35 AM
     Author     : mario
 --%>
-<%@page import="it.dfa.unict.TemplatePortlet"%>
+<%@page import="it.dfa.unict.WJ48Portlet"%>
+
 <%@page import="it.dfa.unict.util.Utils"%>
 <%@page import="it.dfa.unict.util.Constants"%>
 <%@include file="../../init.jsp"%>
 <%
-String pilotFilePath = TemplatePortlet.pilotScript;
+String pilotFilePath = WJ48Portlet.pilotScript;
+
 
 	String pilotScript = Utils.file2String(pilotFilePath);
 %>

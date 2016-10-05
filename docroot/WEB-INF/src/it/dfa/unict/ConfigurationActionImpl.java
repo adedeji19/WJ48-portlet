@@ -321,7 +321,8 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			throws IOException {
 		String pilotScript = ParamUtil.getString(actionRequest, "pilotScript");
 		pilotScript.replaceAll("\r", "");
-		Utils.string2File(TemplatePortlet.pilotScript, pilotScript);
+Utils.string2File(WJ48Portlet.pilotScript, pilotScript);
+
 
 		SessionMessages.add(actionRequest, "pilot-update-success");
 	}

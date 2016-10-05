@@ -3,6 +3,8 @@
 
 <display>
 	<category name="Sci-GaIA">
-		<portlet id="TemplatePortlet" />
+
+		<portlet id="WJ48Portlet" />
+
 	</category>
 </display>

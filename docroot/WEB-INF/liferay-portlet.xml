@@ -3,13 +3,15 @@
 
 <liferay-portlet-app>
 	<portlet>
-		<portlet-name>TemplatePortlet</portlet-name>
+		<portlet-name>WJ48Portlet</portlet-name>
+
 		<icon>/icon.png</icon>
 		<configuration-action-class>it.dfa.unict.ConfigurationActionImpl</configuration-action-class>
 		<instanceable>false</instanceable>
 		<header-portlet-css>/css/main.css</header-portlet-css>
 		<footer-portlet-javascript>/js/main.js</footer-portlet-javascript>
-		<css-class-wrapper>template-portlet</css-class-wrapper>
+		<css-class-wrapper>WJ48-portlet</css-class-wrapper>
+
 	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>

@@ -17,7 +17,7 @@
 
 <aui:layout>
 	<aui:column columnWidth="50" first="true">
-		<img src="<%=request.getContextPath()%>/images/AppLogo.png"
+		<img src="<%=request.getContextPath()%>/images/J48.jpg"
 			height="100%" width="100%" />
 		<aui:button id="view" name="view" value="perform-again"
 			onClick="<%= viewUrl %>" />

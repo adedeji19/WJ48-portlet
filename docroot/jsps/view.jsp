@@ -1,73 +1,75 @@
 <%-- 
     Document   : view
-    Created on : Feb 15, 2016, 10:29:44 AM
-    Author     : mario
+    Created on : 24-Sep-2016, 03:24:44
+    Author     : adedeji
 --%>
 
-<%@page import="it.dfa.unict.AppInfrastructureInfo"%>
-<%@page import="it.dfa.unict.AppPreferences"%>
-<%@page import="it.dfa.unict.util.Constants"%>
-<%@page import="it.dfa.unict.util.Utils"%>
-<%@page import="java.util.Calendar"%>
-<%@page import="java.text.SimpleDateFormat"%>
-<%@page import="java.util.List"%>
-<%@include file="../init.jsp"%>
+<%@page import="com.liferay.portal.kernel.util.ParamUtil"%>
+<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet"%>
+<%@ taglib uri="http://alloy.liferay.com/tld/aui" prefix="aui"%>
+<%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui"%>
 
-<%
-	PortletPreferences preferences = renderRequest.getPreferences();
-	String JSONAppInfras = GetterUtil.getString(preferences.getValue(
-	Constants.APP_INFRASTRUCTURE_INFO_PREFERENCES, null));
-
-	List<AppInfrastructureInfo> enabledInfas = Utils
-	.getEnabledInfrastructureInfo(JSONAppInfras);
-	
-	SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.TS_FORMAT);
-	String timestamp = dateFormat.format(Calendar.getInstance().getTime());
-	
-	String jobLabel = user.getScreenName() + "_" +  timestamp;
-%>
-
-<aui:layout>
-	<aui:column columnWidth="50" first="true">
-		<img src="<%=request.getContextPath()%>/images/AppLogo.png"
+<aui:column columnWidth="50" first="true">
+		<img src="<%=request.getContextPath()%>/images/J48.jpg"
 			height="80%" width="80%" />
-	</aui:column>
-	<aui:column columnWidth="50" last="true">
-		<%=LanguageUtil.get(portletConfig, themeDisplay.getLocale(), "how-to-use") %>
-	</aui:column>
+</aui:column>
 
-	<aui:column columnWidth="100" first="true">
-		<c:choose>
-			<c:when test="<%=enabledInfas.size() == 0%>">
-				<div class="portlet-msg-info">
-					<liferay-ui:message key="no-infras-available" />
-				</div>
-			</c:when>
-			<c:otherwise>
-				<liferay-ui:error key="error-space" message="error-disk-space" />
-				<portlet:actionURL name="submit" var="submitURL" />
+<portlet:defineObjects />
+<h2>WEKA - J48 Algorithm</h2>
+<p>
+	This portlet will help to analyse your uploaded data with C4.5 algorithm using J48, WEKA's implementation of decision tree learner.
+        <aui:a href="http://www.cs.waikato.ac.nz/ml/weka/" label="WEKA"></aui:a>
+	is a state-of-the-art facility for developing machine learning techniques 
+        and their application to real-world data mining problems. It is a collection 
+        of machine learning algorithms for data mining tasks. This portlet will, however,
+        only make use of a particular classification algorithm to analyse data sets.
+<h3>Upload your Dataset</h3>
+<hr />
+<p></p>
 
-				<aui:form action="<%=submitURL%>" enctype="multipart/form-data"
-					method="post">
+<portlet:actionURL name="submit" var="uploadFileURL" />
+<aui:form action="<%=uploadFileURL%>" method="post"
+	enctype="multipart/form-data">
+    
 
-					<aui:fieldset label="application-input">
-						<liferay-ui:error key="empty-file" message="empty-file" />
-						<liferay-ui:error key="error-limit-exceeded"
-							message="error-limit-exceeded" />
+	<aui:input name="upload dataset" title="Dataset upload" type="file" />
 
-						<aui:input type="file" name="fileupload" label="input-file"
-							id="file" help="file-help" />
+	<!-- <aui:input name="url" title="URL" type="text" /> -->
+        
+        <hr />
+        
+        <h3>Choose classifier and select test option</h3>
 
-						<aui:input type="text" name="jobLabel" label="job-label" size="60"
-							helpMessage="job-label-help" id="jobLabel" value="<%= jobLabel %>" />
+	<p>Once you have your data set loaded, select and apply the appropriate 
+           classifier and set test option below. For the purpose this portlet, 
+           you'll analyse the data with C4.5 algorithm using J48. 
+           In addition, the "Percentage split" test option will be chosen 
+           and it will predict about 66% of the tested data. 
+	</p>
+        
+        <h3>Classify</h3>
+	<hr />
+	<aui:select label="Select classifier" name="clasify">
+		<aui:option label="J48" value="j48"></aui:option>
+	</aui:select>
+        
+        <h3>Test options</h3>
+	<hr />
 
-						<aui:field-wrapper>
-							<aui:button name="submit" value="submit" type="submit" />
-							<aui:button name="reset" value="cancel" type="reset" />
-						</aui:field-wrapper>
-					</aui:fieldset>
-				</aui:form>
-			</c:otherwise>
-		</c:choose>
-	</aui:column>
-</aui:layout>
+	<aui:select label="Select test option" name="test">
+		<aui:option label="Percentage split" value="percentageSplit"></aui:option>
+	</aui:select>
+        
+        <br />
+
+	<aui:button type="submit" value="submit"></aui:button>
+	
+	
+
+</aui:form>
+<!-- 
+<portlet:renderURL var="clasfy">
+<portlet:param name="mvcPath" value="/html/wekaapp/clasfy.jsp"></portlet:param>
+</portlet:renderURL>
+<a href="<%=clasfy%>">COntinue</a>
+ -->
