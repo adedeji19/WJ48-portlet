@@ -1,128 +1,101 @@
-#!/bin/sh 
-#
-# hostname - portlet pilot script
-#
-# Hostname Grid job can be considered the equivalent of the 'hello world' code
-# of computer programming languages.
-#
-# The following script does:
-#   o The hostname
-#   o The execution start/end dates
-#   o Listing of the worker node' $HOME directory
-#   o Listing of the worker node' $PWD current directory
-#   o Shows the input file
-#   o Simulates the creation of an output file  
-# 
-# It is kindly suggested to keep all informative echoes
-# below; they will help developers and system administrators
-# to identify possible troubles
-#
-# Author: riccardo.bruno@ct.infn.it
-#
+#!/bin/bash
+
+export WEKA_HOME=/opt/weka
+export WEKA_JAR=$WEKA_HOME/weka.jar
+
+
+INPUT_FILTER="" #weka.filters.unsupervised.attribute.ReplaceMissingValues
+FOLDS=""
+while getopts "f:x:" flag; do
+case "$flag" in
+    f) INPUT_FILTER=$OPTARG;;
+    x) FOLDS=$OPTARG;;
+esac
+done
+
+INPUT_FILE=${@:$OPTIND:1} #breast-cancer-wisconsin.data
+CLASSIFIER=${@:$OPTIND+1:1} #weka.classifiers.bayes.NaiveBayes
+INPUT_FILE_ARFF=$INPUT_FILE #'.arff'
+PREPROCESED_PREFIX='preprocessed.'
+#PREPROCESED_INPUT_FILE_ARFF='preprocessed.'$INPUT_FILE_ARFF
+OUTPUT_FILE=weka.out
 
 #
-# Multi-infrastructure job submission needs
-# to build some environment variables
-# if the application needs a sw directory
-# set and uncomment the SW_NAME value
-# then enable code lines related to PATH and
-# LD_LIBRARY_PATH settings 
-# hostname example does not require to define
-# library and path directories
+# Following statement produce the simulation_output file
 #
-#SW_NAME="MyAppDir" # Place here the software dir name and uncomment it
-VO_NAME=$(voms-proxy-info -vo)
-VO_VARNAME=$(echo $VO_NAME | sed s/"\."/"_"/g | sed s/"-"/"_"/g | awk '{ print toupper($1) }')
-VO_SWPATH_NAME="VO_"$VO_VARNAME"_SW_DIR"
-VO_SWPATH_CONTENT=$(echo $VO_SWPATH_NAME | awk '{ cmd=sprintf("echo $%s",$1); system(cmd); }')
+OUTFILE=simulation.log
+echo "--------------------------------------------------" >  $OUTFILE
+echo "Job execution starts on: '"$(date)"'"		  >> $OUTFILE
+echo ""                                                   >> $OUTFILE
+echo "---[Working directory]----------------------------" >> $OUTFILE
+ls -l $(pwd)						  >> $OUTFILE
+echo "--------------------------------------------------" >> $OUTFILE
+echo "Analisys started at: '"$(date)"'"     	          >> $OUTFILE
+echo ""                                                   >> $OUTFILE
+echo "Job landed at: '"${HOSTNAME}"'"                     >> $OUTFILE
+echo ""                                                   >> $OUTFILE
+echo "#################[  START LOG  ]##################" >> $OUTFILE
+echo ""                                                   >> $OUTFILE
 
-echo "Multi infrastructure variables:"
-echo "-------------------------------"
-echo "VO_NAME          : "$VO_NAME
-echo "VO_VARNAME       : "$VO_VARNAME
-echo "VO_SWPATH_NAME   : "$VO_SWPATH_NAME
-echo "VO_SWPATH_CONTENT: "$VO_SWPATH_CONTENT
-#
-# Assign PATH and LD_LIBRARY_PATH
-#
-# You may assign VO specific values uncommenting the
-# lines below
-#
-#case $VO_NAME in
-#    'prod.vo.eu-eela.eu')
-#    export PATH=$PATH:$VO_SWPATH_CONTENT/$SW_NAME/bin
-#    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$VO_SWPATH_CONTENT/$SW_NAME/lib
-#    ;;
-#    'cometa')
-#    export PATH=$PATH:$VO_SWPATH_CONTENT/$SW_NAME/bin
-#    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$VO_SWPATH_CONTENT/$SW_NAME/lib    
-#    ;;
-#    'eumed')
-#    export PATH=$PATH:$VO_SWPATH_CONTENT/$SW_NAME/bin
-#    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$VO_SWPATH_CONTENT/$SW_NAME/lib
-#    ;;
-#    *)
-#    echo "ERROR: Unsupported VO '"$VO_NAME"'"
-#    exit 1
-#esac
-#
-# Otherwise use a common setting
-#
-#export PATH=$PATH:$VO_SWPATH_CONTENT/$SW_NAME/bin
-#export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$VO_SWPATH_CONTENT/$SW_NAME/lib
-#echo
-#echo "PATH and LD_LIBRARY_PATH:"
-#echo "-------------------------"
-#echo "PATH: "$PATH
-#echo "LD_LIBRARY_PATH: "$LD_LIBRARY_PATH
-# Check if the software directory exists
-#echo
-#echo "Software directory : '"$VO_SWPATH_CONTENT/$SW_NAME"'"
-#echo "------------------"
-#ls -ld $VO_SWPATH_CONTENT/$SW_NAME
-#echo
+if [ "$INPUT_FILE" == ""  ]; then
+	echo Error: input file missed.			  >> $OUTFILE
+	exit 1;
+fi
 
-# Get the hostname
-HOSTNAME=$(hostname)
+if [ "$CLASSIFIER" == ""  ]; then
+	echo Error: classifier missed.			  >> $OUTFILE
+	exit 1;
+fi
 
-# In order to avoid concurrent accesses to files, the 
-# portlet uses filename prefixes like
-# <timestamp>_<username>_filename
-# for this reason the file must be located before to use it
-INFILE=$(ls -1 | grep $1)
+if [ ${INPUT_FILE: -4} != "arff" ]; then
+	echo Converting data to arff...			  >> $OUTFILE
+	TMP=$(mktemp)
+	java -cp $WEKA_JAR weka.core.converters.CSVLoader $INPUT_FILE -H > $TMP 
+	cp $TMP $INPUT_FILE'.arff'
+	INPUT_FILE_ARFF=$INPUT_FILE_ARFF'.arff'
+	rm -f $TMP
+else
+	echo Input file is already arff. 		  >> $OUTFILE
+	INPUT_FILE_ARFF=$INPUT_FILE
+fi
 
-echo "--------------------------------------------------"
-echo "Job landed on: '"$HOSTNAME"'"
-echo "--------------------------------------------------"
-echo "Job execution starts on: '"$(date)"'"
+echo 'Processing ' $INPUT_FILE_ARFF '...'		  >> $OUTFILE
 
-echo "---[WN HOME directory]----------------------------"
-ls -l $HOME
+if [ "$INPUT_FILTER" != "" ]; then
+	echo 'Appling "'$INPUT_FILTER'" filter.'	  >> $OUTFILE
+	TMP=$(mktemp)
+	java -cp $WEKA_JAR $INPUT_FILTER -i $INPUT_FILE_ARFF -o $TMP
+	cp $TMP $PREPROCESED_PREFIX$INPUT_FILE_ARFF
+	rm -f $TMP
+else
+	echo 'No filter applied.'			  >> $OUTFILE
+	mv  $INPUT_FILE_ARFF $PREPROCESED_PREFIX$INPUT_FILE_ARFF
+fi
 
-echo "---[WN Working directory]-------------------------"
-ls -l $(pwd)
+CHECKALG=$(head -n 1 $PREPROCESED_PREFIX$INPUT_FILE_ARFF  | grep NumericToNominal)
+if [ "$CHECKALG" = "" ]; then
+	echo  'Appling "weka.filters.unsupervised.attribute.NumericToNominal" filter' >> $OUTFILE
+	TMP=$(mktemp)
+	java -cp $WEKA_JAR weka.filters.unsupervised.attribute.NumericToNominal -R first-last -i $PREPROCESED_PREFIX$INPUT_FILE_ARFF -o $TMP
+	cp $TMP $PREPROCESED_PREFIX$INPUT_FILE_ARFF
+	rm -f $TMP
+fi
 
-echo "---[Macro file]---------------------------------"
-cat $INFILE
-echo
-
-#
-# Following statement simulates a produced job file
-#
-OUTFILE=hostname_output.txt
-echo "--------------------------------------------------"  > $OUTFILE
-echo "Job landed on: '"$HOSTNAME"'"                       >> $OUTFILE
-echo "infile:  '"$INFILE"'"                               >> $OUTFILE
-echo "outfile: '"$OUTFILE"'"                              >> $OUTFILE
+if [ "$FOLDS" != "" ]; then 
+	echo  'Using -x ' $FOLDS			  >> $OUTFILE
+	FOLDSFLAG="-x $FOLDS"
+else
+	FOLDSFLAG=""
+fi
+java -cp $WEKA_JAR $CLASSIFIER -t $PREPROCESED_PREFIX$INPUT_FILE_ARFF $FOLDSFLAG > stdout 2> stderr 
+#cat stdout                                                >> $OUTFILE
+echo "#################[   END LOG   ]##################" >> $OUTFILE
+echo ""                                                   >> $OUTFILE
+echo "Simulation ended at: '"$(date)"'"                   >> $OUTFILE
 echo "--------------------------------------------------" >> $OUTFILE
 echo ""                                                   >> $OUTFILE
 
-# Producing an output file 
-cat $INFILE >> $OUTFILE
-
 #
-# At the end of the script file it's a good practice to 
-# collect all generated job files into a single tar.gz file
-# the generated archive may include the input files as well
+# Collect all generated output files into a single tar.gz file
 #
-tar cvfz hostname-Files.tar.gz $INFILE $OUTFILE
+tar cvfz weka-output.tar.gz $OUTFILE #output/
