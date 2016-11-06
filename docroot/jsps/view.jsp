@@ -17,7 +17,7 @@
 <portlet:defineObjects />
 <h2>WEKA - J48 Algorithm</h2>
 <p>
-	This portlet will help to analyse your uploaded data with C4.5 algorithm using J48, WEKA's implementation of decision tree learner.
+	This portlet will help to analyse an uploaded dataset with C4.5 algorithm using J48, WEKA's implementation of decision tree learner.
         <aui:a href="http://www.cs.waikato.ac.nz/ml/weka/" label="WEKA"></aui:a>
 	is a state-of-the-art facility for developing machine learning techniques 
         and their application to real-world data mining problems. It is a collection 
@@ -42,7 +42,7 @@
 
 	<p>Once you have your data set loaded, select and apply the appropriate 
            classifier and set test option below. For the purpose this portlet, 
-           you'll analyse the data with C4.5 algorithm using J48. 
+           you will analyse the data with C4.5 algorithm using J48. 
            In addition, the "Percentage split" test option will be chosen 
            and it will predict about 66% of the tested data. 
 	</p>
@@ -50,7 +50,7 @@
         <h3>Classify</h3>
 	<hr />
 	<aui:select label="Select classifier" name="clasify">
-		<aui:option label="J48" value="j48"></aui:option>
+		<aui:option label="J48" value="weka.classifiers.trees.J48"></aui:option>
 	</aui:select>
         
         <h3>Test options</h3>
