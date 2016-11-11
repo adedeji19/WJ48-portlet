@@ -4,3 +4,9 @@
 /.tern-project
 *.db
 /nbproject/private/
+/docroot/WEB-INF/lib/jersey-json.jar
+/docroot/WEB-INF/lib/jersey-multipart.jar
+/docroot/WEB-INF/lib/jersey-core.jar
+/docroot/WEB-INF/lib/jersey-client.jar
+/nbproject_bak/
+/nbproject/
