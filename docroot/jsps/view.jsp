@@ -20,7 +20,7 @@
 <portlet:defineObjects />
 <h2>WEKA - J48 Algorithm</h2>
 <p>
-	This portlet will help to analyse your uploaded data with C4.5
+	This portlet will help to analyse an uploaded dataset with C4.5
 	algorithm using J48, WEKA's implementation of decision tree learner.
 	<aui:a href="http://www.cs.waikato.ac.nz/ml/weka/" label="WEKA"></aui:a>
 	is a state-of-the-art facility for developing machine learning
@@ -35,18 +35,27 @@
 <portlet:actionURL name="submit" var="uploadFileURL" />
 <aui:form action="<%=uploadFileURL%>" method="post"
 	enctype="multipart/form-data">
-	<liferay-ui:error key="empty-file" message="empty-file" />
-	<aui:input name="uploadDataset" title="Dataset upload" type="file"
-		label="Select Dataset:" />
+	<aui:fieldset label="Preprocessing">
+		<liferay-ui:error key="empty-file" message="empty-file" />
+		<aui:input name="uploadDataset" title="Dataset upload" type="file"
+			label="Select Dataset:">
+			<aui:validator name="acceptFiles">'csv,arff'</aui:validator>
+		</aui:input>
+		<aui:select label="filters" name="filters">
+			<aui:option label="Select filter ..." value="" />
+			<aui:option label="Attribute selection"
+				value="weka.filters.supervised.attribute.AttributeSelection" />
+		</aui:select>
+	</aui:fieldset>
 
 	<hr />
 
 	<h3>Choose classifier and select test option</h3>
 
 	<p>Once you have your data set loaded, select and apply the
-		appropriate classifier and set test option below. For the purpose this
-		portlet, you'll analyse the data with C4.5 algorithm using J48. In
-		addition, the "Percentage split" test option will be chosen and it
+		appropriate classifier and set test option below. For the purpose of
+		this portlet, you will analyse the data with C4.5 algorithm using J48.
+		In addition, the "Percentage split" test option will be chosen and it
 		will predict about 66% of the tested data.</p>
 
 	<h3>Classify</h3>
@@ -58,9 +67,20 @@
 	<h3>Test options</h3>
 	<hr />
 
-	<aui:select label="Select test option" name="test">
-		<aui:option label="Percentage split" value="percentageSplit" />
-	</aui:select>
+	<%-- 	<aui:select label="Select test option" name="test"> --%>
+	<%-- 		<aui:option label="Percentage split" value="percentageSplit" /> --%>
+	<%-- 	</aui:select> --%>
+
+	<aui:field-wrapper name="test-type" label="Select test type">
+		<aui:input checked="true" inlineLabel="right" name="test-type"
+			type="radio" value="select-test-type" label="Use training set" />
+		<aui:input inlineLabel="right" name="test-type" type="radio"
+			value="supplied-test-set" label="Supplied test set" />
+		<aui:input checked="true" inlineLabel="right" name="test-type"
+			type="radio" value="cross-validation" label="Cross-validation" />
+		<aui:input inlineLabel="right" name="test-type" type="radio"
+			value="percentage-split" label="Percentage split" />
+	</aui:field-wrapper>
 
 	<br />
 

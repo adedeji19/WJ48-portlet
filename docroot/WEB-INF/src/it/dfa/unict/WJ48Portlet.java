@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.User;
@@ -124,8 +125,15 @@ public class WJ48Portlet extends MVCPortlet {
 
 					appInput.getArguments().add(inputARFF.getName());
 
-					String classifier = uploadRequest.getParameter("clasify");
+					String classifier = ParamUtil.getString(uploadRequest,
+							"clasify", null);
 					appInput.getArguments().add(classifier);
+
+					String filter = ParamUtil.getString(uploadRequest,
+							"filters", null);
+					if (filter != null && !filter.isEmpty()) {
+						appInput.getArguments().add("-f " + filter);
+					}
 
 					_log.info(appInput);
 					FutureGatewayClient client = new FutureGatewayClient(
@@ -174,11 +182,11 @@ public class WJ48Portlet extends MVCPortlet {
 				// Hide default Liferay success/error messages
 				PortletConfig portletConfig = (PortletConfig) actionRequest
 						.getAttribute(JavaConstants.JAVAX_PORTLET_CONFIG);
-				LiferayPortletConfig liferayPortletConfig =
-						(LiferayPortletConfig) portletConfig;
-				SessionMessages.add(actionRequest,
-						liferayPortletConfig.getPortletId()
-						+ SessionMessages.KEY_SUFFIX_HIDE_DEFAULT_ERROR_MESSAGE);
+				LiferayPortletConfig liferayPortletConfig = (LiferayPortletConfig) portletConfig;
+				SessionMessages
+						.add(actionRequest,
+								liferayPortletConfig.getPortletId()
+										+ SessionMessages.KEY_SUFFIX_HIDE_DEFAULT_ERROR_MESSAGE);
 
 			}
 		} catch (IOException e) {
