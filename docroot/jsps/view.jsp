@@ -39,7 +39,7 @@
 		<liferay-ui:error key="empty-file" message="empty-file" />
 		<aui:input name="uploadDataset" title="Dataset upload" type="file"
 			label="Select Dataset:">
-			<aui:validator name="acceptFiles">'csv,arff'</aui:validator>
+			<aui:validator name="acceptFiles">'csv,arff,data'</aui:validator>
 		</aui:input>
 		<aui:select label="filters" name="filters">
 			<aui:option label="Select filter ..." value="" />
